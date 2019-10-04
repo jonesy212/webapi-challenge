@@ -4,6 +4,8 @@ const Projects = require("./projectModel");
 
 const router = express.Router();
 
+server.use(validateProjectId)
+
 router.get("/", (req, res) => {
   Projects.find(req.query)
     .then(projects => {
@@ -91,7 +93,7 @@ router.get("/:projectId/actions", (req, res) => {
 
 router.get("/:id/comments", (req, res) => {
     
-  posts.findPostComments(req.params.id)
+  Projects.findPostComments(req.params.id)
     .then(comment => {
       res.status(201).json(comment)
     })
@@ -102,3 +104,23 @@ router.get("/:id/comments", (req, res) => {
       });
     });
 });
+
+
+// custome Middleware
+
+function validateProjectId(req, res, next){
+  if(!req.params.id){
+    req.status(200).json(project, {message: `your project action ${id} has been validated`});
+  }else{
+    res.status(400).json({message: `You project action id ${id} is not valid `});
+  }
+  Projects.getProjectActions()
+  .then(project =>{
+    res.status(200).json(project)
+  })
+  .catch(error => {
+    console.log(error);
+    res.status(500).json({message: `missing required action field`})
+  })
+  next();
+}
