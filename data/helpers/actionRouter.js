@@ -1,10 +1,10 @@
-const express = 'express';
+const express = require('express');
 const Actions = require('./actionModel');
 
 const router = express.Router();
 
-router.get('/', (req, res) => {
-    Actions.get(req.query, id)
+router.get('/:id', (req, res) => {
+    Actions.get(req.params.id)
     .then(actions => {
         res.status(200).json(actions)
     })
@@ -52,6 +52,6 @@ router.put('/:id', (req, res) => {
     })
 })
 
-
+module.exports = router;
 //custom middle ware
 

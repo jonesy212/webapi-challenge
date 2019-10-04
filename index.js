@@ -13,14 +13,14 @@ I need this code, just don't know where, perhaps should make some middleware, do
 Go code!
 */
 
-const server = require('express');
-const helmet = require('helmet')
-require('dotenv').config();
-const actionRouter = require('./data/helpers/actionRouter')
-const projectRouter = require('./data/helpers/projectRouter')
+const express = require('express');
+const helmet = require('helmet');
+const actionRouter = require('./data/helpers/actionRouter');
+const projectRouter = require('./data/helpers/projectRouter');
+
 const server = express();
 
-
+server.use(helmet());
 server.use(express.json());
 
 
