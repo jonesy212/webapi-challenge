@@ -12,3 +12,22 @@ I need this code, just don't know where, perhaps should make some middleware, do
 
 Go code!
 */
+
+const server = require('express');
+
+const server = express();
+require('dotenv').config();
+port = 8000;
+
+server.use(express.json());
+
+server.use('/', (req, res)=> {
+    res.status(200).json({hello:'Api is running'})
+});
+
+server
+
+
+
+const port = process.env.PORT || 8002
+server.listen(port, () => console.log(`\nrunning on ${port}\n`))
