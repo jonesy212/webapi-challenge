@@ -14,18 +14,22 @@ Go code!
 */
 
 const server = require('express');
-
-const server = express();
+const helmet = require('helmet')
 require('dotenv').config();
-port = 8000;
+const actionRouter = require('./data/helpers/actionRouter')
+const projectRouter = require('./data/helpers/projectRouter')
+const server = express();
+
 
 server.use(express.json());
 
-server.use('/', (req, res)=> {
+
+server.get('/', (req, res)=> {
     res.status(200).json({hello:'Api is running'})
 });
 
-server
+server.use('/api/projects', projectRouter);
+server.use('/api/actions', actionRouter);
 
 
 
